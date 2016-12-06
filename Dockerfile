@@ -103,7 +103,7 @@ RUN mkdir ${KIBANA_HOME} \
  && chown -R kibana:kibana ${KIBANA_HOME} /var/log/kibana
 
 WORKDIR ${KIBANA_HOME}
-RUN gosu kibana bin/kibana plugin --install elastic/sense
+#RUN gosu kibana bin/kibana plugin --install elastic/sense
 
 ADD ./kibana-init /etc/init.d/kibana
 RUN sed -i -e 's#^KIBANA_HOME=$#KIBANA_HOME='$KIBANA_HOME'#' /etc/init.d/kibana \
@@ -159,8 +159,8 @@ ADD ./kibana.yml ${KIBANA_HOME}/config/kibana.yml
 #                           ELASTICSEARCH PLUGINS
 ###############################################################################
 
-WORKDIR ${ES_HOME}
-RUN gosu elasticsearch bin/plugin install royrusso/elasticsearch-HQ
+#WORKDIR ${ES_HOME}
+#RUN gosu elasticsearch bin/plugin install royrusso/elasticsearch-HQ
 
 
 ###############################################################################
