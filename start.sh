@@ -10,6 +10,14 @@
 #   Do not attempt to run this script if the ELK services are running (or be
 #   prepared to reap zombie processes).
 
+### Setting Memory Limit
+
+if [ ! -z $ELK_MAX_MEMORY ]
+then
+    sed -e 's/ES_JAVA_OPTS=""/ES_JAVA_OPTS= ""'"$ELK_MAX_MEMORY"'"/' -i /etc/default/elasticsearch
+    sed -e 's/-Xms2g/-Xms'"$ELK_MAX_MEMORY"'/' -i /etc/elasticsearch/jvm.options
+    sed -e 's/-Xmx2g/-Xmx'"$ELK_MAX_MEMORY"'/' -i /etc/elasticsearch/jvm.options
+fi
 
 ## handle termination gracefully
 
@@ -25,7 +33,7 @@ trap _term SIGTERM
 
 
 ## remove pidfiles in case previous graceful termination failed
-# NOTE - This is the reason for the WARNING at the top - it's a bit hackish, 
+# NOTE - This is the reason for the WARNING at the top - it's a bit hackish,
 #   but if it's good enough for Fedora (https://goo.gl/88eyXJ), it's good
 #   enough for me :)
 
