@@ -12,7 +12,7 @@ MAINTAINER Sebastien Pujadas http://pujadas.net
 ENV REFRESHED_AT 2016-04-07
 
 ## Setting env variable for memory limit
-ENV ELK_MAX_MEMORY 2g
+ENV ELK_MAX_MEMORY 3g
 
 ###############################################################################
 #                                INSTALLATION
